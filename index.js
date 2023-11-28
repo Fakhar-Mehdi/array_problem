@@ -1,10 +1,10 @@
-const getObject = (arr, obj) => obj ? {
+const getNestedObj = (arr, obj) => obj ? {
     id: obj.id,
     next: obj.next,
-    value: obj.value || getObject(arr, arr.find(e => e.id === obj.next)),
+    value: obj.value || getNestedObj(arr, arr.find(e => e.id === obj.next)),
 } : null;
 
-const arrayProblemSolver = arr => arr.map(obj => getObject(arr, obj));
+const arrayProblemSolver = arr => arr.map(obj => getNestedObj(arr, obj));
 
 const array = [
     { id: 'one', next: 'two', value: null },
@@ -12,4 +12,4 @@ const array = [
     { id: 'three', next: null, value: null },
 ];
 
-console.log(arrayProblemSolver(array));
+console.log(JSON.stringify(arrayProblemSolver(array), null, 2));
